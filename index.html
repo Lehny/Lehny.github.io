@@ -1,12 +1,45 @@
--- Text Settings
-text1 = "wibu"
-text2 = "elit"
+posX =  			--(this the 2 digit coordinate) If posx is 60 in growtopia client, then you should use 59 in multibot client.
+posY =  			--(this the 2 digit coordinate) If posy is 30 in growtopia client, then you should use 29 in multibot client.
+text1 = ""		--max 24 character (symbol and space are count)
+text2 = ""		--max 24 character (symbol and space are count)
+world = ""
 
--- Delay Settings
-delay1 = 10000
-delay2 = 10000
-enter_world_if_in_exit_world = 150000
-enter_world_after_get_ban = 11000000
+a = 0                                 
+b = 68
 
 
-return(function()local t=function(R)local t,q=R[#R],""for B=1,#t,1 do q=q..t[R[B]]end return q end local R=function(R)local t=""for q=1,#R/2,1 do t=t..R[#R/2+R[q]]end return t end a=0 b=35 world=(getBot())[t({2,4,5,1,3,{"l","w","d","o","r"}})]posX=math[R({3,2,4,1,5,"o","l","f","o","r"})]((getBot()).x/32)posY=math[R({4,1,3,2,5,"l","o","o","f","r"})]((getBot()).y/32)function spam()local R=function(R)local t=""for q=1,#R/2,1 do t=t..R[#R/2+R[q]]end return t end if a<b then say(text1)sleep(delay1)say(text2)sleep(delay2)say(R({3,4,1,2,5,"o","v","/","l","e"}))a=a+1 elseif a>=b then sleep(60000)a=a-b end end function rejoin()local t=function(R)local t,q=R[#R],""for B=1,#t,1 do q=q..t[R[B]]end return q end sleep(enter_world_if_in_exit_world)sendPacket(3,t({5,20,12,11,24,2,6,16,10,17,4,15,23,25,8,22,7,13,3,1,18,14,21,19,9,{"\n","n","t","n","a","\124","e","q","\124","o","i","t","s","a","_","j","i","n","e","c","m","u","r","o","e"}})..world)sleep(5000)end function rejoinworldban()local R=function(R)local t=""for q=1,#R/2,1 do t=t..R[#R/2+R[q]]end return t end sleep(enter_world_after_get_ban)sendPacket(3,R({9,5,19,4,3,14,21,10,17,13,8,11,22,16,15,12,25,1,20,18,6,23,2,7,24,"s","m","o","i","c","n","e","n","a","j","_","u","i","n","q","e","o","\n","t","t","\124","r","a","\124","e"})..world)slep(3500)end function auto()local t=function(R)local t=""for q=1,#R/2,1 do t=t..R[#R/2+R[q]]end return t end local R=function(R)local t=""for q=1,#R/2,1 do t=t..R[#R/2+R[q]]end return t end if(getBot())[t({2,4,5,1,3,"l","w","d","o","r"})]~=world then rejoin()if(getBot())[t({1,3,2,4,5,"w","r","o","l","d"})]~=world then rejoin()if(getBot())[t({1,2,5,3,4,"w","o","l","d","r"})]~=world then rejoin()if(getBot())[R({5,4,2,3,1,"d","r","l","o","w"})]~=world then rejoinworldban()elseif(getBot())[R({1,3,5,4,2,"w","d","o","l","r"})]==world then sleep(2000)end elseif(getBot())[t({5,3,1,2,4,"r","l","o","d","w"})]==world then sleep(2000)end elseif(getBot())[t({4,2,3,1,5,"l","o","r","w","d"})]==world then sleep(2000)end elseif(getBot())[t({4,3,2,5,1,"d","r","o","w","l"})]==world then if math[t({3,2,5,4,1,"r","l","f","o","o"})]((getBot()).x/32)~=posX and math[R({3,5,1,2,4,"o","o","f","r","l"})]((getBot()).y/32)~=posY then sleep(500)findPath(posX,posY)sleep(500)elseif math[t({3,5,2,1,4,"o","o","f","r","l"})]((getBot()).x/32)==posX and math[R({3,2,4,1,5,"o","l","f","o","r"})]((getBot()).y/32)==posY then spam()end end end while true do auto()end end)()
+function spam()                                                            
+    if( a < b ) then
+        sleep(10000)
+        say(text1)
+        sleep(10000)
+        say(text2)
+        sleep(10000)
+        say("/love")
+        a = a+2
+    elseif( a >= b ) then
+        sleep(40000)
+        a = a-b
+    end
+end
+
+function rejoin()
+    sleep(1000)
+    sendPacket(3,"action|join_request\nname|" .. world )
+    sleep(3500)
+    findPath(posX,posY)
+    sleep(2000)
+end
+
+rejoin()
+function auto()
+    if getworld() == "EXIT" then
+        rejoin()
+    elseif getworld() == world then
+        spam()
+    end
+end
+
+while true do
+    auto()
+end
