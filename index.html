@@ -1,47 +1,14 @@
-posX =  			--(this the 2 digit coordinate) If posx is 60 in growtopia client, then you should use 59 in multibot client.
-posY =  			--(this the 2 digit coordinate) If posy is 30 in growtopia client, then you should use 29 in multibot client.
-text1 = "jancuk1"		--max 24 character (symbol and space are count)
-text2 = "jancuk2"		--max 24 character (symbol and space are count)
-world = ""
-
-spam = true
-
-a = 0                                 
-b = 68
-
-
-function spam()                                                            
-    if( a < b ) then
-        sleep(10000)
-        say(text1)
-        sleep(10000)
-        say(text2)
-        sleep(10000)
-        say("/love")
-        a = a+2
-    elseif( a >= b ) then
-        sleep(40000)
-        a = a-b
-    end
-end
-
-function rejoin()
-    sleep(1000)
-    sendPacket(3,"action|join_request\nname|" .. world )
-    sleep(3500)
-    findPath(posX,posY)
-    sleep(2000)
-end
-
-rejoin()
-function auto()
-    if getworld() == "EXIT" then
-        rejoin()
-    elseif getworld() == world then
-        spam()
-    end
-end
+text1 = "jancuk1"    --max 24 character (symbol and space are count)
+text2 = "jancuk2"    --max 24 character (symbol and space are count)
+enable_text = true
 
 while true do
-    auto()
+  if enable_text then
+    say(text1)
+    sleep(10000)
+    say(text2)
+    sleep(10000)
+  end
+  say("/love")
+  sleep(10000)
 end
