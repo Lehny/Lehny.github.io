@@ -4,16 +4,19 @@ function toBoolean(stringValue)
   return webText:find(stringValue) ~= nil
 end
 
--- Contoh penggunaan
-local str1 = "1"
-local bool1 = toBoolean(str1)
+while true do
+  local str1 = "1"
+  local bool1 = toBoolean(str1)
 
-if bool1 == true then
-  connect()
-  sleep(500)
-else
-  disconnect()
-  sleep(500)
+  if bool1 == true then
+    connect()
+    sleep(500)
+  else
+    disconnect()
+    sleep(500)
+  end
+
+  setBool("Auto Reconnect", bool1)
+
+  sleep(60 * 1000) -- Jeda selama satu menit
 end
-
-setBool("Auto Reconnect", bool1) 
